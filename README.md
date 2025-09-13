@@ -1,4 +1,4 @@
-# 🎓 Majorly
+#  Majorly
 
 
 <img width="408" height="612" alt="WhatsApp_Image_2025-09-13_at_10 24 41_PM-removebg-preview" src="https://github.com/user-attachments/assets/a8f97ee7-fb3b-41ab-8520-904c81a0118d" />
