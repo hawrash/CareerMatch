@@ -1,4 +1,4 @@
-# CareerMatch
+# Majorly
 
 
 ## Project Overview
