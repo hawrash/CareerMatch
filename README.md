@@ -108,7 +108,7 @@ http://127.0.0.1:8000
 - 📚 Blog or resource section for career advice
 
 ---
-##Backend
+## Backend
 Majorly/
 │── manage.py
 │── requirements.txt
@@ -161,7 +161,7 @@ Majorly/
     ├── home.html            # Landing page
 
 
-##Frontend
+## Frontend
 
 frontend/
 │── package.json
