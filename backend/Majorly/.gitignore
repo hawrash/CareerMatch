@@ -1,51 +1,7 @@
-# --- Python / Django ---
-__pycache__/
-*.py[cod]
-*.sqlite3
-*.pyo
-*.pyd
-*.db
-*.log
-*.pot
-*.pyc
-*.mo
-
-# Django specific
-/media
-/staticfiles
-*.pid
-
-# Environments
-.env
 venv/
-ENV/
-env/
-
-# VS Code / IDE
-.vscode/*
-!.vscode/extensions.json
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# --- Node / React ---
-node_modules/
-dist/
-dist-ssr/
-*.local
-
-# Logs
-logs
+__pycache__/
+*.pyc
+db.sqlite3
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# OS files
-.DS_Store
-Thumbs.db
+*.env
+node_modules/
