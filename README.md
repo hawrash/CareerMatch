@@ -109,6 +109,7 @@ http://127.0.0.1:8000
 
 ---
 ## Backend
+```bash
 Majorly/
 │── manage.py
 │── requirements.txt
@@ -159,10 +160,11 @@ Majorly/
 └── templates/
     ├── base.html            # Shared layout (navbar, footer)
     ├── home.html            # Landing page
-
+```
 
 ## Frontend
 
+```bash
 frontend/
 │── package.json
 │── public/
@@ -193,7 +195,7 @@ frontend/
 │
 └── styles/
     ├── global.css
-
+```
 
  
 ---
