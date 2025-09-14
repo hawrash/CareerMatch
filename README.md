@@ -108,6 +108,96 @@ http://127.0.0.1:8000
 - 📚 Blog or resource section for career advice
 
 ---
+##Backend
+Majorly/
+│── manage.py
+│── requirements.txt
+│── db.sqlite3 (or PostgreSQL/MySQL config)
+│── .gitignore
+│── venv/ 
+│
+├── majorly/                # Main project folder (Django settings)
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   ├── asgi.py
+│
+├── accounts/               # User authentication (login/signup)
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── forms.py
+│   ├── templates/accounts/
+│       ├── signup.html
+│       ├── login.html
+│       ├── profile.html
+│
+├── majors/                 # Main app for majors & careers
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── templates/majors/
+│       ├── majors_list.html   # Search & discover majors
+│       ├── major_detail.html  # Details (overview, salaries, etc.)
+│       ├── dashboard.html     # Pie chart & recommendations
+│
+├── reviews/                # Ratings & reviews
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── templates/reviews/
+│       ├── reviews_list.html
+│       ├── add_review.html
+│
+├── static/                 # CSS, JS, images
+│   ├── css/
+│   │   ├── style.css
+│   ├── js/
+│       ├── main.js
+│
+└── templates/
+    ├── base.html            # Shared layout (navbar, footer)
+    ├── home.html            # Landing page
+
+
+##Frontend
+
+frontend/
+│── package.json
+│── public/
+│   ├── index.html
+│
+├── src/
+│   ├── index.js
+│   ├── App.js
+│   ├── components/
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── SearchBar.js
+│   │   ├── DashboardChart.js
+│   │   ├── MajorCard.js
+│   │   ├── ReviewCard.js
+│   │   ├── ProfileCard.js
+│   │
+│   ├── pages/
+│       ├── Home.js
+│       ├── Signup.js
+│       ├── Login.js
+│       ├── MajorsList.js
+│       ├── MajorDetail.js
+│       ├── Dashboard.js
+│       ├── Profile.js
+│
+├── assets/                 # icons, logos, illustrations
+│
+└── styles/
+    ├── global.css
+
+
+ 
+---
+
 
 ## 📄 License
 
