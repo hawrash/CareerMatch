@@ -1,0 +1,165 @@
+.home {
+  max-width: 1000px;
+  margin: 50px auto 100px;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #3c6379;
+}
+
+/* Welcome Section */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.welcome-section h1 {
+  font-size: 36px;
+  color: #e49500;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Bottom of Top Section Split */
+.bottom-top-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Left side: hobby + suggestions */
+.left-bottom {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Right side: search bar */
+.right-bottom {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 300px;
+  max-width: 300px; /* limit overall search bar width */
+}
+
+/* Hobby Box */
+.hobby-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.hobby-box input {
+  padding: 10px 15px;
+  border: 2px solid #68889a;
+  border-radius: 12px;
+  width: 200px;
+  max-width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.hobby-box input:focus {
+  border-color: #e49500;
+  box-shadow: 0 0 5px rgba(228, 149, 0, 0.5);
+  outline: none;
+}
+
+.hobby-box button {
+  padding: 10px 20px;
+  background-color: #3c6379;
+  border: none;
+  border-radius: 12px;
+  color: #f7a924;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.hobby-box button:hover {
+  background-color: #9a4e27;
+  transform: scale(1.05);
+}
+
+/* Suggestions */
+.suggestions ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.suggestions li {
+  background-color: #e49500;
+  color: #3c6379;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.suggestions li:hover {
+  transform: scale(1.1);
+  background-color: #f7a924;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Search Bar */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.search-bar input {
+  flex: 1;           /* take remaining space */
+  min-width: 120px;  /* don't get too small */
+  max-width: 180px;  /* constrain width */
+  padding: 10px 15px;
+  border: 2px solid #68889a;
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar input:focus {
+  border-color: #e49500;
+  box-shadow: 0 0 5px rgba(228, 149, 0, 0.5);
+  outline: none;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  background-color: #e49500;
+  border: none;
+  border-radius: 12px;
+  color: #f7a924;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-bar button:hover {
+  background-color: #9a4e27;
+  transform: scale(1.05);
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .bottom-top-section {
+    flex-direction: column;
+  }
+
+  .right-bottom {
+    justify-content: flex-start;
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .hobby-box input,
+  .search-bar input {
+    width: 100%;
+  }
+}

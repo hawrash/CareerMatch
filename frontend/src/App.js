@@ -8,7 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import MajorsList from './pages/MajorsList';
 import MajorDetail from './pages/MajorDetail';
-import Dashboard from './pages/Dashboard';
+
 import Profile from './pages/Profile';
 
 function App() {
@@ -21,7 +21,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/majors" element={<MajorsList />} />
         <Route path="/majors/:id" element={<MajorDetail />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />

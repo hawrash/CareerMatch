@@ -1,0 +1,40 @@
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3c6379;
+  padding: 25px 40px; /* taller navbar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* stays on top of content if needed */
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* space between links/icons */
+}
+
+.navLink {
+  text-decoration: none;
+  color: #eba124;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease-in-out;
+}
+
+.navLink:hover {
+  color: #9a4e27;
+}
+
+.navIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Make logo bigger */
+.navLink img[alt="Logo"] {
+  width: 80px;
+  height: auto;
+}
