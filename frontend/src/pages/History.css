@@ -1,0 +1,47 @@
+.history-page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ensures page fills viewport */
+  font-family: Arial, sans-serif;
+  color: #3c6379;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.history-content {
+  flex: 1; /* pushes footer to bottom */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.history-content h2 {
+  color: #e49500;
+  margin-bottom: 15px;
+}
+
+.history-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history-content li {
+  background-color: #f7f2e0;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #e49500;
+}
+
+.history-content button {
+  background-color: #e49500;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.history-content button:hover {
+  background-color: #d37f00;
+}

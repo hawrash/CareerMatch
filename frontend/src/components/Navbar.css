@@ -38,3 +38,19 @@
   width: 80px;
   height: auto;
 }
+
+/* Logout button fix */
+.navIconButton {
+  background: none;      /* remove button background */
+  border: none;          /* remove border */
+  padding: 0;            /* remove extra padding */
+  margin: 0;             /* remove margin */
+  cursor: pointer;
+  display: flex;         /* behave like .navLink */
+  align-items: center;   /* vertical center like other icons */
+  transition: color 0.2s;
+}
+
+.navIconButton:hover img {
+  filter: brightness(0.8); /* subtle hover effect for logout icon */
+}

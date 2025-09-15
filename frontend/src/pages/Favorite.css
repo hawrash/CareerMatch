@@ -1,0 +1,19 @@
+.majors-list-page {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #3c6379;
+}
+
+.majors-list-page h2 {
+  color: #e49500;
+  margin-bottom: 20px;
+}
+
+.majors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}

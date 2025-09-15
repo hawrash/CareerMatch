@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
-import majorsData from '../majors.json'; // make sure this is inside src/
+import majorsData from '../majors.json';
 
 function Home() {
   const [hobby, setHobby] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
-  // Function to filter majors based on input words
   const filterMajors = (input) => {
     if (!input.trim()) return [];
 
     const words = input.toLowerCase().split(' ').filter(w => w.trim() !== '');
-
     const matchedMajors = majorsData.filter(major => {
       const fields = major.fields;
       return words.some(word =>
@@ -32,20 +32,31 @@ function Home() {
     return matchedMajors;
   };
 
-  // Hobby suggestion button
   const getAISuggestions = () => {
     const matched = filterMajors(hobby);
     setSuggestions(matched.length > 0 ? matched : ['General Studies']);
   };
 
-  // Search button
   const handleSearch = () => {
-    const matched = filterMajors(searchQuery);
-    setSuggestions(matched.length > 0 ? matched : ['No majors found']);
+    const matched = majorsData.find(
+      m => m.fields.name.toLowerCase() === searchQuery.trim().toLowerCase()
+    );
+    if (matched) {
+      navigate(`/MajorsView/${matched.pk}`);
+    } else {
+      alert('Major not found!');
+    }
   };
 
-  const handleSuggestionClick = (major) => {
-    setSearchQuery(major);
+  const handleSuggestionClick = (majorName) => {
+    setSearchQuery(majorName);
+    setSuggestions([]);
+    const matched = majorsData.find(
+      m => m.fields.name.toLowerCase() === majorName.toLowerCase()
+    );
+    if (matched) {
+      navigate(`/MajorsView/${matched.pk}`);
+    }
   };
 
   return (

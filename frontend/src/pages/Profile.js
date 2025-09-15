@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileCard from '../components/ProfileCard';
+import './Profile.css';
 
 function Profile() {
-  const user = { username: 'JohnDoe', email: 'john@example.com' };
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  if (!user) return <p>Loading user info...</p>;
 
   return (
-    <div>
+    <div className="profile-page">
       <h2>Profile</h2>
       <ProfileCard user={user} />
     </div>

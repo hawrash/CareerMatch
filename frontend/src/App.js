@@ -1,29 +1,42 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-import Home from './pages/Home';
+import Landing from './pages/Landing';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import MajorsList from './pages/MajorsList';
-import MajorDetail from './pages/MajorDetail';
-
+import Home from './pages/Home';
+import Favorites from './pages/Favorite';
+import MajorsView from './pages/MajorsView'; // updated page
 import Profile from './pages/Profile';
+import History from './pages/History';
 
 function App() {
+  const location = useLocation();
+
+  // pages where Navbar/Footer should NOT appear
+  const noNavFooter = ['/', '/login', '/signup'];
+  const hideNavFooter = noNavFooter.includes(location.pathname);
+
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/majors" element={<MajorsList />} />
-        <Route path="/majors/:id" element={<MajorDetail />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-      <Footer />
+    <div className="app">
+      {!hideNavFooter && <Navbar />}
+
+      <div className={!hideNavFooter ? "container" : ""}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/Favorites " element={<Favorites />} />
+            <Route path="/MajorsView/:id" element={<MajorsView />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+
+      {!hideNavFooter && <Footer />}
     </div>
   );
 }

@@ -1,15 +1,21 @@
-# majors/views.py
 from django.shortcuts import render
 from .models import Major
 
-def major_chart(request):
-    majors = Major.objects.all()
+def search_major(request):
+    query = request.GET.get('q', '').strip()
+    major = None
+    not_found = False
 
-    # Prepare data for chart
-    names = [m.name for m in majors]
-    counts = [m.students_count for m in majors]  # or any numeric field
+    if query:
+        try:
+            # Exact case-insensitive match
+            major = Major.objects.get(name__iexact=query)
+        except Major.DoesNotExist:
+            not_found = True
 
-    return render(request, "majors/chart.html", {
-        "names": names,
-        "counts": counts
-    })
+    context = {
+        'query': query,
+        'major': major,
+        'not_found': not_found
+    }
+    return render(request, 'majors/search_results.html', context)

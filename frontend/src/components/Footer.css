@@ -1,14 +1,29 @@
 .footer {
   width: 100%;
-  text-align: center;
-  padding: 20px;
   background-color: #3c6379;
   color: #f7a924;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   font-size: 14px;
   border-top: 3px dashed #eba124;
+  padding: 20px 0; /* vertical padding only */
+}
+
+.footer .container {
+  max-width: 1000px; /* match Home and Navbar */
+  margin: 0 auto;
+  padding: 0 40px; /* horizontal padding */
   display: flex;
   justify-content: space-between; /* messages side by side */
   flex-wrap: wrap;
   gap: 10px;
+  text-align: center;
+}
+
+/* Optional: stack on small screens */
+@media (max-width: 768px) {
+  .footer .container {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
 }
