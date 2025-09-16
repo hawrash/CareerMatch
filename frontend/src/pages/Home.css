@@ -37,9 +37,10 @@
 .right-bottom {
   flex: 1;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column; /* allow error message below input */
+  justify-content: flex-start;
   min-width: 300px;
-  max-width: 300px; /* limit overall search bar width */
+  max-width: 300px;
 }
 
 /* Hobby Box */
@@ -52,7 +53,7 @@
 
 .hobby-box input {
   padding: 10px 15px;
-  border: 2px solid #68889a;
+  border: 2px solid #3c6379;
   border-radius: 12px;
   width: 200px;
   max-width: 100%;
@@ -73,7 +74,7 @@
   color: #f7a924;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .hobby-box button:hover {
@@ -97,12 +98,13 @@
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
 .suggestions li:hover {
   transform: scale(1.1);
   background-color: #f7a924;
+  color: #3c6379;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -115,24 +117,22 @@
 }
 
 .search-bar input {
-  flex: 1;           /* take remaining space */
-  min-width: 120px;  /* don't get too small */
-  max-width: 180px;  /* constrain width */
+  flex: 1;          
   padding: 10px 15px;
-  border: 2px solid #68889a;
-  border-radius: 12px;
+  border-radius: 20px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  border: 2px solid #3c6379;
 }
 
 .search-bar input:focus {
-  border-color: #e49500;
+  border-color: #3c6379;
   box-shadow: 0 0 5px rgba(228, 149, 0, 0.5);
   outline: none;
 }
 
 .search-bar button {
   padding: 10px 15px;
-  background-color: #e49500;
+  background-color: #3c6379;
   border: none;
   border-radius: 12px;
   color: #f7a924;
@@ -144,6 +144,18 @@
 .search-bar button:hover {
   background-color: #9a4e27;
   transform: scale(1.05);
+}
+
+/* Error message displayed below search bar */
+.error-page-message {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #f8d7da; /* light red background */
+  color: #721c24; /* dark red text */
+  border: 1px solid #f5c6cb;
+  border-radius: 12px;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* Responsive tweaks */

@@ -1,47 +1,71 @@
 .history-page-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* ensures page fills viewport */
-  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #3c6379;
   padding: 20px;
+  background: linear-gradient(135deg, #fdfaf5, #f7efe0);
   box-sizing: border-box;
 }
 
 .history-content {
-  flex: 1; /* pushes footer to bottom */
+  flex: 1;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
 .history-content h2 {
   color: #e49500;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
 }
 
 .history-content ul {
   list-style: none;
   padding: 0;
+  margin-top: 20px;
 }
 
 .history-content li {
-  background-color: #f7f2e0;
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 8px;
+  background-color: #fff7e6;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
   border: 1px solid #e49500;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease-in-out;
+  text-align: left;
+}
+
+.history-content li:hover {
+  background-color: #ffe1b5;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(228, 149, 0, 0.2);
 }
 
 .history-content button {
   background-color: #e49500;
   color: #fff;
   border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
   cursor: pointer;
   margin-bottom: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.25s ease-in-out;
 }
 
 .history-content button:hover {
   background-color: #d37f00;
+  transform: scale(1.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }

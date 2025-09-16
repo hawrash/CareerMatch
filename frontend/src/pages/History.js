@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import majorsData from '../majors.json';   // ✅ import here
 import './History.css';
 
 function History() {
@@ -8,7 +9,7 @@ function History() {
 
   useEffect(() => {
     const storedHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
-    setHistory(storedHistory.reverse());
+    setHistory(storedHistory); // already latest-first
   }, []);
 
   const clearHistory = () => {
@@ -17,11 +18,12 @@ function History() {
   };
 
   const handleClick = (term) => {
-    const majorsData = JSON.parse(localStorage.getItem('majorsData')) || [];
     const major = majorsData.find(
       (m) => m.fields.name.toLowerCase() === term.toLowerCase()
     );
-    if (major) navigate(`/MajorsView/${major.pk}`);
+    if (major) {
+      navigate(`/MajorsView/${major.pk}`);
+    }
   };
 
   return (
@@ -41,7 +43,6 @@ function History() {
           </ul>
         )}
       </div>
-      {/* your existing footer will appear here */}
     </div>
   );
 }

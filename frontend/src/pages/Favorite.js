@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import majorsData from '../majors.json';
 import favoriteIcon from '../assets/favorite.png';
 import './Favorite.css';
 
 const KEY = 'favorites';
 
-// --- Helper functions ---
+// Load favorites from localStorage
 function loadFavorites() {
   try {
     const fav = JSON.parse(localStorage.getItem(KEY)) || [];
@@ -15,79 +16,97 @@ function loadFavorites() {
   }
 }
 
+// Save favorites to localStorage
 function saveFavorites(list) {
   localStorage.setItem(KEY, JSON.stringify(list.map(Number)));
 }
 
+// Toggle favorite
 function toggleFavorite(pk) {
   const favorites = loadFavorites();
-  let updated;
-  if (favorites.includes(pk)) {
-    updated = favorites.filter(id => id !== pk);
-  } else {
-    updated = [...favorites, pk];
-  }
+  const updated = favorites.includes(pk)
+    ? favorites.filter(id => id !== pk)
+    : [...favorites, pk];
   saveFavorites(updated);
   return updated;
 }
 
-// --- Main component ---
 function Favorite() {
   const [favorites, setFavorites] = useState([]);
+  const navigate = useNavigate();
 
-  function updateFavorites() {
+  // Update favorites list
+  const updateFavorites = () => {
     const favIds = loadFavorites();
-    const favMajors = majorsData.filter(function(m) {
-      return favIds.includes(m.pk);
-    });
+    const favMajors = majorsData.filter(m => favIds.includes(m.pk));
     setFavorites(favMajors);
-  }
+  };
 
-  useEffect(function() {
+  useEffect(() => {
     updateFavorites();
-    const handleStorage = function() { updateFavorites(); };
+    const handleStorage = () => updateFavorites();
     window.addEventListener('storage', handleStorage);
-    return function() { window.removeEventListener('storage', handleStorage); };
+    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  function handleToggle(pk) {
+  const handleToggle = (pk) => {
     toggleFavorite(pk);
     updateFavorites();
-  }
+  };
 
-  // Render all majors in a card-like view
-  return React.createElement('div', { className: 'favorites-container' },
-    React.createElement('h1', null, 'Majors & Favorites'),
+  const handleCardClick = (pk) => {
+    navigate(`/MajorsView/${pk}`);
+  };
 
-    // All majors
-    React.createElement('div', { className: 'majors-grid' },
-      majorsData.map(function(major) {
-        const isFav = loadFavorites().includes(major.pk);
-        return React.createElement('div', { key: major.pk, className: 'major-card' },
-          React.createElement('h2', null, major.fields.name),
-          React.createElement('p', null, major.fields.about),
-          React.createElement('button', {
-            onClick: function() { handleToggle(major.pk); },
-            className: isFav ? 'fav-btn active' : 'fav-btn'
-          },
-            React.createElement('img', { src: favoriteIcon, alt: 'Favorite', className: 'fav-icon' }),
-            isFav ? 'Remove Favorite' : 'Add Favorite'
-          )
-        );
-      })
-    ),
+  return (
+    <div className="favorites-container">
+      <h1>Majors & Favorites</h1>
 
-    // Your Favorites List
-    React.createElement('div', { className: 'your-favorites' },
-      React.createElement('h2', null, 'Your Favorites'),
-      favorites.length === 0 ?
-        React.createElement('p', null, 'No favorites yet.') :
-        React.createElement('ul', null,
-          favorites.map(function(major) {
-            return React.createElement('li', { key: major.pk }, major.fields.name);
-          })
-        )
-    )
+      {/* All majors */}
+      <div className="majors-grid">
+        {majorsData.map(major => {
+          const isFav = loadFavorites().includes(major.pk);
+          return (
+            <div
+              key={major.pk}
+              className="major-card"
+            >
+              <div className="card-content" onClick={() => handleCardClick(major.pk)}>
+                <h2>{major.fields.name}</h2>
+                <p>{major.fields.about}</p>
+              </div>
+              <button
+                onClick={() => handleToggle(major.pk)}
+                className={isFav ? 'fav-btn active' : 'fav-btn'}
+              >
+                <img src={favoriteIcon} alt="Favorite" className="fav-icon" />
+                {isFav ? 'Remove Favorite' : 'Add Favorite'}
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Favorites list */}
+      <div className="your-favorites">
+        <h2>Your Favorites</h2>
+        {favorites.length === 0 ? (
+          <p>No favorites yet.</p>
+        ) : (
+          <ul>
+            {favorites.map(major => (
+              <li
+                key={major.pk}
+                onClick={() => handleCardClick(major.pk)}
+                className="favorite-item"
+              >
+                {major.fields.name}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 

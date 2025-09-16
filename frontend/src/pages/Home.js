@@ -7,6 +7,7 @@ function Home() {
   const [hobby, setHobby] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(''); // <-- new state
   const navigate = useNavigate();
 
   const filterMajors = (input) => {
@@ -43,8 +44,9 @@ function Home() {
     );
     if (matched) {
       navigate(`/MajorsView/${matched.pk}`);
+      setErrorMessage(''); // clear message on success
     } else {
-      alert('Major not found!');
+      setErrorMessage('Major not found!'); // show message on page
     }
   };
 
@@ -56,6 +58,9 @@ function Home() {
     );
     if (matched) {
       navigate(`/MajorsView/${matched.pk}`);
+      setErrorMessage(''); // clear message if success
+    } else {
+      setErrorMessage('Major not found!');
     }
   };
 
@@ -98,10 +103,18 @@ function Home() {
               type="text"
               placeholder="Search for a major..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setErrorMessage(''); // clear error while typing
+              }}
             />
             <button onClick={handleSearch}>Search</button>
           </div>
+
+          {/* Error message displayed on the page */}
+          {errorMessage && (
+            <div className="error-page-message">{errorMessage}</div>
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,76 @@
+/* SearchBar.css */
+
+.search-bar-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.search-bar-wrapper form {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.search-bar-wrapper input[type="text"] {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #3c6379;
+  background-color: #f7f7f7;
+  transition: all 0.3s ease;
+}
+
+.search-bar-wrapper input[type="text"]:focus {
+  background-color: #eef3f5;
+  box-shadow: inset 0 0 5px rgba(60, 99, 121, 0.5);
+}
+
+.search-bar-wrapper button {
+  background-color: #e49500;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.search-bar-wrapper button:hover {
+  background-color: #f7a924;
+}
+
+/* Suggest Component */
+.suggest-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #3c6379;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.suggest-list li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  color: #3c6379;
+}
+
+.suggest-list li:hover {
+  background-color: #f7a924;
+  color: #fff;
+}

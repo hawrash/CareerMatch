@@ -1,6 +1,6 @@
 # majors/serializers.py
 from rest_framework import serializers
-from .models import Major
+from majors.models import Major  # use absolute import to be safe
 
 class MajorSerializer(serializers.ModelSerializer):
     class Meta:

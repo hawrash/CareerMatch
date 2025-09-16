@@ -10,6 +10,21 @@ function MajorsView() {
 
   const [isFavorite, setIsFavorite] = useState(false);
 
+  // ✅ Save to search history when a major is viewed (max 10 items)
+  useEffect(() => {
+    if (major) {
+      let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+      // Add new search to the front
+      history = [major.fields.name, ...history.filter(item => item !== major.fields.name)];
+
+      // Keep only the last 10
+      history = history.slice(0, 10);
+
+      localStorage.setItem("searchHistory", JSON.stringify(history));
+    }
+  }, [major]);
+
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
     setIsFavorite(favorites.includes(major?.pk));
@@ -28,8 +43,6 @@ function MajorsView() {
       localStorage.setItem('favorites', JSON.stringify(favorites));
       setIsFavorite(true);
     }
-
-    // ✅ No navigate here, so the page stays the same
   };
 
   if (!major) return <p>Major not found!</p>;
