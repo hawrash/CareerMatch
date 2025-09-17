@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Majors Dashboard</h2>
+
+<ul>
+    {% for major in majors %}
+    <li>
+        <h3>{{ major.fields.name }}</h3>
+        <p><strong>Career Prospects:</strong> {{ major.fields.career_prospects }}</p>
+        <p><strong>Universities:</strong> {{ major.fields.universities }}</p>
+        <p><strong>Entry Level Salary:</strong> ${{ major.fields.entry_level_salary }}</p>
+        <p><strong>Mid Level Salary:</strong> ${{ major.fields.mid_level_salary }}</p>
+        <p><strong>Senior Level Salary:</strong> ${{ major.fields.senior_level_salary }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

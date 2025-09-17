@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ major.name }}</h2>
+
+<p><strong>Description:</strong> {{ major.about }}</p>
+<p><strong>Career Prospects:</strong> {{ major.career_prospects }}</p>
+<p><strong>Universities:</strong> {{ major.universities }}</p>
+<p><strong>Entry Level Salary:</strong> ${{ major.entry_level_salary }}</p>
+<p><strong>Mid Level Salary:</strong> ${{ major.mid_level_salary }}</p>
+<p><strong>Senior Level Salary:</strong> ${{ major.senior_level_salary }}</p>
+<p><strong>Employment Rate:</strong> {{ major.employment_rate }}%</p>
+{% endblock %}

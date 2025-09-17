@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Majors</h2>
+<ul>
+    {% for major in majors %}
+    <li>
+        <a href="{% url 'major_detail' major.pk %}">{{ major.fields.name }}</a> - {{ major.fields.category|default:"No category" }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

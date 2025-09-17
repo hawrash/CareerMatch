@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Your Favorite Majors</h2>
+
+{% if favorites %}
+    <ul>
+        {% for fav in favorites %}
+            <li>
+                {{ fav.major.name }} - 
+                <a href="{% url 'remove_favorite' fav.major.id %}">Remove</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You have no favorite majors saved yet.</p>
+{% endif %}
+
+{% endblock %}
