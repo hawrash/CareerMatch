@@ -113,7 +113,7 @@ http://127.0.0.1:8000
 backend/
 │── manage.py
 │── requirements.txt
-│── db.sqlite3 (أو إعدادات PostgreSQL/MySQL)
+│── db.sqlite3 ( PostgreSQL/MySQL)
 │── .gitignore
 │── venv/
 
