@@ -110,56 +110,57 @@ http://127.0.0.1:8000
 ---
 ## Backend
 ```bash
-Majorly/
+backend/
 │── manage.py
 │── requirements.txt
-│── db.sqlite3 (or PostgreSQL/MySQL config)
+│── db.sqlite3 (أو إعدادات PostgreSQL/MySQL)
 │── .gitignore
-│── venv/ 
-│
-├── majorly/                # Main project folder (Django settings)
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   ├── asgi.py
-│
-├── accounts/               # User authentication (login/signup)
+│── venv/
+
+├── user_app/               # User authentication & profiles
 │   ├── models.py
 │   ├── views.py
 │   ├── urls.py
 │   ├── forms.py
-│   ├── templates/accounts/
+│   ├── templates/user_app/
 │       ├── signup.html
 │       ├── login.html
 │       ├── profile.html
-│
-├── majors/                 # Main app for majors & careers
+
+├── major_app/              # Majors & career info
 │   ├── models.py
 │   ├── views.py
 │   ├── urls.py
-│   ├── templates/majors/
-│       ├── majors_list.html   # Search & discover majors
-│       ├── major_detail.html  # Details (overview, salaries, etc.)
-│       ├── dashboard.html     # Pie chart & recommendations
-│
-├── reviews/                # Ratings & reviews
+│   ├── templates/major_app/
+│       ├── majors_list.html
+│       ├── major_detail.html
+│       ├── dashboard.html
+
+├── review_app/             # Ratings & reviews
 │   ├── models.py
 │   ├── views.py
 │   ├── urls.py
-│   ├── templates/reviews/
+│   ├── templates/review_app/
 │       ├── reviews_list.html
 │       ├── add_review.html
-│
+
+├── favorite_app/           # Favorites management
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   ├── templates/favorite_app/
+│       ├── favorites_list.html
+
 ├── static/                 # CSS, JS, images
 │   ├── css/
-│   │   ├── style.css
+│   │   └── style.css
 │   ├── js/
-│       ├── main.js
-│
+│       └── main.js
+
 └── templates/
-    ├── base.html            # Shared layout (navbar, footer)
-    ├── home.html            # Landing page
+    ├── base.html           # Layout (navbar, footer)
+    ├── home.html           # Landing page
+
 ```
 
 ## Frontend
