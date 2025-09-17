@@ -32,7 +32,7 @@ function Navbar() {
           <img src={history} alt="History" className="navIcon" />
         </Link>
 
-        <Link to="/favorite" className="navLink">
+        <Link to="/favorites" className="navLink">
           <img src={favorite} alt="Favorite" className="navIcon" />
         </Link>
 

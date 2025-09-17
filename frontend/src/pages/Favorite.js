@@ -4,38 +4,34 @@ import majorsData from '../majors.json';
 import favoriteIcon from '../assets/favorite.png';
 import './Favorite.css';
 
-const KEY = 'favorites';
+const BASE_KEY = 'favorites';
 
-// Load favorites from localStorage
+// ✅ Use userId or email from localStorage/session
+function getUserKey() {
+  const user = JSON.parse(localStorage.getItem('currentUser')); 
+  // Example: { id: 1, email: "test@example.com" }
+  return user ? `${BASE_KEY}_${user.id}` : BASE_KEY;
+}
+
+// Load favorites for this user
 function loadFavorites() {
   try {
-    const fav = JSON.parse(localStorage.getItem(KEY)) || [];
-    return fav.map(Number);
+    return JSON.parse(localStorage.getItem(getUserKey())) || [];
   } catch {
     return [];
   }
 }
 
-// Save favorites to localStorage
+// Save favorites for this user
 function saveFavorites(list) {
-  localStorage.setItem(KEY, JSON.stringify(list.map(Number)));
-}
-
-// Toggle favorite
-function toggleFavorite(pk) {
-  const favorites = loadFavorites();
-  const updated = favorites.includes(pk)
-    ? favorites.filter(id => id !== pk)
-    : [...favorites, pk];
-  saveFavorites(updated);
-  return updated;
+  localStorage.setItem(getUserKey(), JSON.stringify(list));
 }
 
 function Favorite() {
   const [favorites, setFavorites] = useState([]);
   const navigate = useNavigate();
 
-  // Update favorites list
+  // Load favorite majors from localStorage
   const updateFavorites = () => {
     const favIds = loadFavorites();
     const favMajors = majorsData.filter(m => favIds.includes(m.pk));
@@ -44,13 +40,16 @@ function Favorite() {
 
   useEffect(() => {
     updateFavorites();
-    const handleStorage = () => updateFavorites();
-    window.addEventListener('storage', handleStorage);
-    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
   const handleToggle = (pk) => {
-    toggleFavorite(pk);
+    let favs = loadFavorites();
+    if (favs.includes(pk)) {
+      favs = favs.filter(id => id !== pk);
+    } else {
+      favs.push(pk);
+    }
+    saveFavorites(favs);
     updateFavorites();
   };
 
@@ -60,52 +59,32 @@ function Favorite() {
 
   return (
     <div className="favorites-container">
-      <h1>Majors & Favorites</h1>
+      <h1>Your Favorite Majors</h1>
 
-      {/* All majors */}
-      <div className="majors-grid">
-        {majorsData.map(major => {
-          const isFav = loadFavorites().includes(major.pk);
-          return (
-            <div
-              key={major.pk}
-              className="major-card"
-            >
-              <div className="card-content" onClick={() => handleCardClick(major.pk)}>
+      {favorites.length === 0 ? (
+        <p>No favorites yet.</p>
+      ) : (
+        <div className="majors-grid">
+          {favorites.map(major => (
+            <div key={major.pk} className="major-card">
+              <div
+                className="card-content"
+                onClick={() => handleCardClick(major.pk)}
+              >
                 <h2>{major.fields.name}</h2>
                 <p>{major.fields.about}</p>
               </div>
               <button
                 onClick={() => handleToggle(major.pk)}
-                className={isFav ? 'fav-btn active' : 'fav-btn'}
+                className="fav-btn active"
               >
                 <img src={favoriteIcon} alt="Favorite" className="fav-icon" />
-                {isFav ? 'Remove Favorite' : 'Add Favorite'}
+                Remove Favorite
               </button>
             </div>
-          );
-        })}
-      </div>
-
-      {/* Favorites list */}
-      <div className="your-favorites">
-        <h2>Your Favorites</h2>
-        {favorites.length === 0 ? (
-          <p>No favorites yet.</p>
-        ) : (
-          <ul>
-            {favorites.map(major => (
-              <li
-                key={major.pk}
-                onClick={() => handleCardClick(major.pk)}
-                className="favorite-item"
-              >
-                {major.fields.name}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

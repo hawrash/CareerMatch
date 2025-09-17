@@ -7,7 +7,7 @@ import Landing from './pages/Landing';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Favorite from './pages/Favorite'; // singular
+import Favorites from './pages/Favorite'; 
 import MajorsView from './pages/MajorsView';
 import Profile from './pages/Profile';
 import History from './pages/History';
@@ -28,7 +28,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/history" element={<History />} />
-          <Route path="/favorites" element={<Favorite />} /> 
+          <Route path="/favorites" element={<Favorites />} /> 
           <Route path="/MajorsView/:id" element={<MajorsView />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
