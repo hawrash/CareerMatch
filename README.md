@@ -153,6 +153,56 @@ backend/
 └── user.json               # Demo user store
 ```
 
+## 📘 ERD (Conceptual)
+
+This app currently stores most data in session and `majors.json`, but the following ERD models the intended structure if moved to a database.
+
+```mermaid
+erDiagram
+  USER ||--o{ FAVORITE : has
+  USER ||--o{ SEARCH_HISTORY : records
+  MAJOR ||--o{ FAVORITE : is_favorited_by
+  MAJOR ||--o{ SEARCH_HISTORY : is_viewed_in
+
+  USER {
+    int id PK
+    string username
+    string email
+    string passwordHash
+  }
+
+  MAJOR {
+    int pk PK
+    string name
+    string about
+    string career_prospects
+    string universities
+    int employment_rate
+    int entry_level_salary
+    int mid_level_salary
+    int senior_level_salary
+  }
+
+  FAVORITE {
+    int id PK
+    int userId FK
+    int majorPk FK
+    datetime createdAt
+  }
+
+  SEARCH_HISTORY {
+    int id PK
+    int userId FK
+    int majorPk FK
+    string term
+    datetime viewedAt
+  }
+```
+
+Notes:
+- In the current Flask implementation, favorites and history are stored in the session as lists; this ERD shows how to persist them.
+- `majors.json` maps to the `MAJOR` table.
+
 ## Frontend (optional stub)
 
 ```bash
