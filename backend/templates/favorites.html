@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Favorites - Majorly{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/favorites.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="favorites-container">
+  <h1>Your Favorite Majors</h1>
+
+  {% if favorites and favorites|length > 0 %}
+    <div class="favorites-grid">
+      {% for major in favorites %}
+        <div class="favorite-card">
+          <h2>{{ major.name }}</h2>
+          <p>{{ major.description }}</p>
+          <form method="POST" action="{{ url_for('toggle_favorite', id=major.id) }}">
+            <button type="submit" class="remove-btn">Remove Favorite</button>
+          </form>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty-message">No favorites yet. Add some majors to your list!</p>
+  {% endif %}
+</div>
+{% endblock %}

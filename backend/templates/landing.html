@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Majorly - Landing{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="landing-container">
+  <div class="landing-content">
+    <h1>Welcome to Majorly</h1>
+    <div class="landing-buttons">
+      <a href="{{ url_for('signup') }}" class="btn primary-btn">Sign Up</a>
+      <a href="{{ url_for('login') }}" class="btn secondary-btn">Login</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

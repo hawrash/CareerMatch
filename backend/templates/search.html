@@ -1,0 +1,24 @@
+<!-- <form method="POST" action="{{ url_for('search') }}">
+  <input
+    type="text"
+    name="searchTerm"
+    placeholder="Search for a major..."
+    value="{{ query | default('') }}"
+    autocomplete="off"
+  />
+  <button type="submit">Search</button>
+</form>
+
+{% if message %}
+  <div class="error-page-message">{{ message }}</div>
+{% endif %}
+
+{% if results %}
+  <div class="suggestions">
+    {% for major in results %}
+      <div class="suggestion-item">
+        <a href="{{ url_for('majors_view', id=major['pk']) }}">{{ major['fields']['name'] }}</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %} -->

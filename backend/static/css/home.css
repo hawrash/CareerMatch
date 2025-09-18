@@ -1,0 +1,170 @@
+/* =======================
+   GLOBAL / PAGE LAYOUT
+======================= */
+
+/* Make html and body full height and column layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Home page main container */
+.home {
+  flex: 1; /* Take all remaining space above footer */
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* =======================
+   WELCOME SECTION
+======================= */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.welcome-section h1 {
+  font-size: 36px;
+  color: #e49500;
+  margin: 0;
+}
+
+/* =======================
+   BOTTOM TOP SECTION
+======================= */
+.bottom-top-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+/* Left (Hobby) and Right (Search) sections */
+.left-bottom, .right-bottom {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =======================
+   HOBBY INPUT / SUGGESTIONS
+======================= */
+.hobby-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.hobby-box input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.hobby-box button {
+  padding: 10px 20px;
+  background-color: #e49500;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.hobby-box button:hover {
+  background-color: #cf7c00;
+}
+
+/* Suggestions list */
+.suggestions {
+  margin-top: 10px;
+}
+
+.suggestions ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.suggestions li {
+  background-color: #e49500;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.suggestions li:hover {
+  transform: scale(1.05);
+  background-color: #cf7c00;
+}
+
+/* =======================
+   SEARCH BAR
+======================= */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-bar input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #3c6379;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-bar button:hover {
+  background-color: #2e4a5b;
+}
+
+/* Error message below search bar */
+.error-page-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+.footer {
+  background-color: #3c6379;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  margin-top: auto; /* sticky footer */
+}
+
+.footer .container p {
+  margin: 5px 0;
+}

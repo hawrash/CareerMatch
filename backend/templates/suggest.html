@@ -1,0 +1,51 @@
+<!-- <input id="searchInput" placeholder="Search majors..." onkeyup="getSuggestions()" autocomplete="off">
+<ul id="suggestionsList"></ul>
+
+<script>
+async function getSuggestions() {
+    const input = document.getElementById('searchInput');
+    const query = input.value.trim();
+    const ul = document.getElementById('suggestionsList');
+    ul.innerHTML = '';
+
+    if (!query) return;
+
+    try {
+        const res = await fetch(`/suggest?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+
+        data.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = item.name;
+            li.style.cursor = 'pointer';
+            li.onclick = () => window.location.href = `/majorsview/${item.pk}`;
+            ul.appendChild(li);
+        });
+    } catch (err) {
+        console.error(err);
+    }
+}
+</script>
+
+<style>
+#suggestionsList {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    background: white;
+    border: 1px solid #ccc;
+    max-width: 300px;
+    position: absolute;
+    z-index: 100;
+}
+
+#suggestionsList li {
+    padding: 8px 12px;
+}
+
+#suggestionsList li:hover {
+    background: #e49500;
+    color: white;
+}
+</style> -->

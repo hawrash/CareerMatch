@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Majorly{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+  <h2>Profile</h2>
+
+  {% if error_message %}
+    <div class="error-message">{{ error_message }}</div>
+  {% endif %}
+
+  {% if user %}
+    <div id="profile-card" class="profile-card">
+      {% if user.avatar %}
+        <img src="{{ user.avatar }}" alt="Avatar" class="avatar">
+      {% endif %}
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Role:</strong> {{ user.role }}</p>
+    </div>
+
+    <button id="edit-btn" class="edit-btn">Edit Profile</button>
+  {% endif %}
+
+  <form id="edit-form" class="profile-form" method="POST" {% if user %}style="display:none"{% endif %}>
+    <label>Name:
+      <input type="text" name="name" value="{{ user.name if user else '' }}" required>
+    </label>
+    <label>Email:
+      <input type="email" name="email" value="{{ user.email if user else '' }}" required>
+    </label>
+    <label>Role:
+      <input type="text" name="role" value="{{ user.role if user else '' }}">
+    </label>
+    <label>Avatar URL:
+      <input type="text" name="avatar" value="{{ user.avatar if user else '' }}" placeholder="Paste image URL">
+    </label>
+    <button type="submit" class="save-btn">
+      {% if user %}Update Profile{% else %}Create Profile{% endif %}
+    </button>
+  </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const editBtn = document.getElementById('edit-btn');
+  const editForm = document.getElementById('edit-form');
+  const profileCard = document.getElementById('profile-card');
+
+  if (editBtn && editForm) {
+    editBtn.addEventListener('click', () => {
+      editForm.style.display = 'block';
+      if (profileCard) profileCard.style.display = 'none';
+      editBtn.style.display = 'none';
+    });
+  }
+});
+</script>
+{% endblock %}

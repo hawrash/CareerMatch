@@ -1,0 +1,47 @@
+.search-bar-wrapper {
+    max-width: 500px;
+    margin: 20px auto;
+    position: relative;
+    font-family: Arial, sans-serif;
+}
+
+#search-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#search-form button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.suggest-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+
+.suggest-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggest-list li:hover {
+    background-color: #f0f0f0;
+}

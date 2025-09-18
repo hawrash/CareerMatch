@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Search History{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="history-container">
+  <h1>Search History</h1>
+
+  {% if history %}
+    <ul class="history-list">
+      {% for term in history %}
+        <li>
+          <a href="{{ url_for('handle_click', term=term) }}">{{ term }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <form method="POST">
+      <button type="submit" class="clear-btn">Clear History</button>
+    </form>
+  {% else %}
+    <p>No search history yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

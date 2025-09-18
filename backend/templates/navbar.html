@@ -1,0 +1,32 @@
+<nav class="Navbar">
+  <!-- Logo goes to /profile (can replace with /home if needed) -->
+  <a href="/home" class="navLink">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="navIcon" />
+  </a>
+
+  <div class="navLinks">
+    <!-- Logout button -->
+    <button onclick="handleLogout()" class="navIconButton">
+      <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout" class="navIcon" />
+    </button>
+
+    <a href="/history" class="navLink">
+      <img src="{{ url_for('static', filename='history.png') }}" alt="History" class="navIcon" />
+    </a>
+
+    <a href="/favorites" class="navLink">
+      <img src="{{ url_for('static', filename='favorite.png') }}" alt="Favorite" class="navIcon" />
+    </a>
+
+    <a href="/profile" class="navLink">
+      <img src="{{ url_for('static', filename='profile.png') }}" alt="Profile" class="navIcon" />
+    </a>
+  </div>
+</nav>
+
+<script>
+  function handleLogout() {
+    localStorage.removeItem('user'); // clear user info
+    window.location.href = '/';       // redirect to landing page
+  }
+</script>
