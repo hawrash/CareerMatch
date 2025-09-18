@@ -1,51 +1,21 @@
-<!-- <input id="searchInput" placeholder="Search majors..." onkeyup="getSuggestions()" autocomplete="off">
-<ul id="suggestionsList"></ul>
+{% extends "base.html" %}
+{% block title %}Suggestions - Majorly{% endblock %}
 
+{% block content %}
+<div class="suggest-page" style="max-width:900px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);padding:20px;">
+  <h2 style="color:#e49500;margin-top:0;">Majors Suggestions</h2>
+  <ul class="suggest-list" style="list-style:none;padding:0;margin:0;border:1px solid #e7edf2;max-width:420px;border-radius:8px;">
+    {% for major in majors %}
+      <li style="padding:10px 12px;cursor:pointer;border-bottom:1px solid #f2f5f7;" onclick="selectItem('{{ major.fields.name }}')">{{ major.fields.name }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
+
+{% block extra_js %}
 <script>
-async function getSuggestions() {
-    const input = document.getElementById('searchInput');
-    const query = input.value.trim();
-    const ul = document.getElementById('suggestionsList');
-    ul.innerHTML = '';
-
-    if (!query) return;
-
-    try {
-        const res = await fetch(`/suggest?q=${encodeURIComponent(query)}`);
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-
-        data.forEach(item => {
-            const li = document.createElement('li');
-            li.innerText = item.name;
-            li.style.cursor = 'pointer';
-            li.onclick = () => window.location.href = `/majorsview/${item.pk}`;
-            ul.appendChild(li);
-        });
-    } catch (err) {
-        console.error(err);
-    }
+function selectItem(value) {
+  alert('You selected: ' + value);
 }
 </script>
-
-<style>
-#suggestionsList {
-    list-style: none;
-    padding: 0;
-    margin: 5px 0 0 0;
-    background: white;
-    border: 1px solid #ccc;
-    max-width: 300px;
-    position: absolute;
-    z-index: 100;
-}
-
-#suggestionsList li {
-    padding: 8px 12px;
-}
-
-#suggestionsList li:hover {
-    background: #e49500;
-    color: white;
-}
-</style> -->
+{% endblock %}

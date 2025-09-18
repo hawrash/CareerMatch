@@ -10,17 +10,13 @@
   {% block extra_css %}{% endblock %}
 </head>
 <body>
-  {% if not hide_nav_footer %}
-    {% include 'navbar.html' %}
-  {% endif %}
+  {% include 'navbar.html' %}
 
   <main>
     {% block content %}{% endblock %}
   </main>
 
-  {% if not hide_nav_footer %}
-    {% include 'footer.html' %}
-  {% endif %}
+  {% include 'footer.html' %}
 
   {% block extra_js %}{% endblock %}
 </body>

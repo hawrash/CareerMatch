@@ -2,28 +2,41 @@
 
 {% block title %}Search History{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
-{% endblock %}
-
 {% block content %}
-<div class="history-container">
-  <h1>Search History</h1>
+<div class="history-container" style="max-width:780px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);padding:20px;">
+  <h1 style="color:#e49500;margin-top:0;">Search History</h1>
 
   {% if history %}
-    <ul class="history-list">
+    <ul class="history-list" style="list-style:none;padding:0;margin:0 0 16px 0;border:1px solid #e7edf2;border-radius:8px;overflow:hidden;">
       {% for term in history %}
-        <li>
-          <a href="{{ url_for('handle_click', term=term) }}">{{ term }}</a>
+        <li style="padding:10px 12px;border-bottom:1px solid #f2f5f7;display:flex;justify-content:space-between;align-items:center;gap:10px;">
+          <span>{{ term }}</span>
+          <button onclick="gotoTerm('{{ term }}')" style="padding:6px 10px;background:#e49500;color:#fff;border:none;border-radius:8px;cursor:pointer;">Open</button>
         </li>
       {% endfor %}
     </ul>
 
     <form method="POST">
-      <button type="submit" class="clear-btn">Clear History</button>
+      <button type="submit" class="clear-btn" style="padding:8px 12px;background:#f3f5f7;color:#1f2d3a;border:1px solid #dfe7ee;border-radius:8px;cursor:pointer;">Clear History</button>
     </form>
   {% else %}
-    <p>No search history yet.</p>
+    <p style="color:#6b7c93;">No search history yet.</p>
   {% endif %}
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+async function gotoTerm(term) {
+  try {
+    const res = await fetch(`/suggest?q=${encodeURIComponent(term)}`);
+    const data = await res.json();
+    if (data && data.length > 0) {
+      window.location.href = `/majorsview/${data[0].pk}`;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+</script>
 {% endblock %}

@@ -1,0 +1,38 @@
+/* Global design tokens and base styles */
+
+:root {
+  --brand: #e49500; /* primary accent */
+  --nav-bg: #3c6379; /* navbar background */
+  --footer-bg: #3c6379; /* footer background */
+  --text: #1f2d3a; /* primary text */
+  --muted: #6b7c93; /* secondary text */
+  --bg: #f4f6f8; /* app background */
+  --card: #ffffff; /* card background */
+  --border: #e7edf2; /* subtle borders */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+main {
+  padding-bottom: 80px; /* breathing room above footer */
+}
+
+a {
+  color: var(--brand);
+}
+
+button.primary {
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+}

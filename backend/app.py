@@ -7,7 +7,7 @@ app.secret_key = "1234"
 
 # ----------- Load majors data -----------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MAJOR_FILE = os.path.join(BASE_DIR, "backend", "majors.json")
+MAJOR_FILE = os.path.join(BASE_DIR, "majors.json")
 
 if os.path.exists(MAJOR_FILE):
     with open(MAJOR_FILE, "r", encoding="utf-8") as f:
@@ -82,19 +82,46 @@ def signup():
 def home():
     hobby_suggestions = []
     error_message = ''
-    if request.method == 'POST':
-        # Hobby suggestions (optional server-side)
-        hobby = request.form.get('hobby', '').strip().lower()
-        if hobby:
-            words = [w for w in hobby.split() if w]
-            matched_majors = []
-            for major in majors_data:
-                fields = major['fields']
-                if any(word in str(value).lower() for word in words for value in fields.values()):
-                    matched_majors.append(fields['name'])
-            hobby_suggestions = matched_majors or ['General Studies']
 
-    return render_template('home.html', hobby_suggestions=hobby_suggestions, error_message=error_message)
+    if request.method == 'POST':
+        # Suggest majors by hobby keywords
+        if 'hobby' in request.form:
+            hobby = request.form.get('hobby', '').strip().lower()
+            words = [w for w in hobby.split() if w]
+            matched_names = []
+            for major in majors_data:
+                fields = major.get('fields', {})
+                # search across all field values
+                field_values = [str(v).lower() for v in fields.values()]
+                if any(word in value for word in words for value in field_values):
+                    name = fields.get('name')
+                    if name:
+                        matched_names.append(name)
+            hobby_suggestions = matched_names or ['General Studies']
+
+        # Exact search by major name
+        elif 'search' in request.form:
+            search_term = request.form.get('search', '').strip().lower()
+            matched = next((m for m in majors_data if m.get('fields', {}).get('name', '').lower() == search_term), None)
+            if matched:
+                return redirect(url_for('majors_view', id=matched['pk']))
+            else:
+                error_message = 'Major not found!'
+
+    return render_template(
+        'home.html',
+        hobby_suggestions=hobby_suggestions,
+        error_message=error_message
+    )
+
+# (Removed earlier duplicate /suggest route that referenced an undefined variable)
+
+
+# -------- Search Page --------
+@app.route('/search')
+def search_page():
+    return render_template('search.html')
+
 
 # ----------- Majors View / Favorites -----------
 @app.route('/majorsview/<int:id>', methods=['GET', 'POST'])
@@ -102,6 +129,19 @@ def majors_view(id):
     major = next((m for m in majors_data if m['pk'] == id), None)
     if not major:
         return "Major not found", 404
+
+    # Track search/view history (keep last 10, most recent first)
+    try:
+        history = load_history()
+        major_name = major.get('fields', {}).get('name', '')
+        if major_name:
+            # remove existing occurrence (case-insensitive)
+            history = [h for h in history if h.lower() != major_name.lower()]
+            history.insert(0, major_name)
+            history = history[:10]
+            save_history(history)
+    except Exception:
+        pass
 
     favorites = load_favorites()
     is_favorite = id in favorites
@@ -116,7 +156,13 @@ def majors_view(id):
     employment_rate = major['fields'].get('employment_rate', 0)
     circle_color = 'green' if employment_rate >= 80 else 'orange' if employment_rate >= 50 else 'red'
 
-    return render_template('majors_view.html', major=major, is_favorite=is_favorite, employment_rate=employment_rate, circle_color=circle_color)
+    return render_template(
+        'majorsview.html',
+        major=major,
+        is_favorite=is_favorite,
+        employment_rate=employment_rate,
+        circle_color=circle_color
+    )
 
 @app.route('/favorites')
 def favorites_view():
@@ -152,7 +198,12 @@ def history():
         return response
     return render_template('history.html', history=load_history())
 
-# ----------- Suggestion API -----------
+# ----------- Suggestion Page (HTML) -----------
+@app.route('/suggest_page')
+def suggest_page():
+    return render_template('suggest.html', majors=majors_data)
+
+# ----------- Suggestion API (JSON) -----------
 @app.route('/suggest')
 def suggest():
     query = request.args.get('q', '').strip().lower()

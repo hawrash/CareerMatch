@@ -1,24 +1,59 @@
-<!-- <form method="POST" action="{{ url_for('search') }}">
-  <input
-    type="text"
-    name="searchTerm"
-    placeholder="Search for a major..."
-    value="{{ query | default('') }}"
-    autocomplete="off"
-  />
-  <button type="submit">Search</button>
-</form>
+{% extends "base.html" %}
+{% block title %}Search - Majorly{% endblock %}
 
-{% if message %}
-  <div class="error-page-message">{{ message }}</div>
-{% endif %}
+{% block content %}
+<div class="search-page" style="max-width:900px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);padding:20px;">
+  <h2 style="color:#e49500;margin-top:0;">Search Majors</h2>
+  <input id="searchInput" placeholder="Type to search..." onkeyup="fetchSuggestions(this.value)" style="width:100%;padding:10px 12px;border:1px solid #ccd6dd;border-radius:8px;">
+  <ul id="suggest-list" style="list-style:none;padding:0;margin:8px 0 0 0;border:1px solid #e7edf2;border-radius:8px;max-height:260px;overflow:auto;"></ul>
+  <div id="errorMessage" class="error-page-message" style="color:#b00020;margin-top:6px;"></div>
+  <p style="color:#6b7c93;font-size:14px;">Tip: click a suggestion to auto-fill the box.</p>
+  <button onclick="goFirstResult()" style="padding:10px 14px;background:#e49500;color:#fff;border:none;border-radius:8px;cursor:pointer;">Go to first result</button>
+  <span id="firstResultId" style="display:none;"></span>
+  <span id="firstResultName" style="display:none;"></span>
+</div>
+{% endblock %}
 
-{% if results %}
-  <div class="suggestions">
-    {% for major in results %}
-      <div class="suggestion-item">
-        <a href="{{ url_for('majors_view', id=major['pk']) }}">{{ major['fields']['name'] }}</a>
-      </div>
-    {% endfor %}
-  </div>
-{% endif %} -->
+{% block extra_js %}
+<script>
+function fetchSuggestions(query) {
+  const list = document.getElementById('suggest-list');
+  const error = document.getElementById('errorMessage');
+  list.innerHTML = '';
+  error.textContent = '';
+  if (!query) return;
+  fetch(`/suggest?q=${encodeURIComponent(query)}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        // remember first result for quick navigate
+        document.getElementById('firstResultId').textContent = data[0].pk;
+        document.getElementById('firstResultName').textContent = data[0].name;
+        data.forEach(item => {
+          const li = document.createElement('li');
+          li.style.padding = '10px 12px';
+          li.style.cursor = 'pointer';
+          li.textContent = item.name;
+          li.onclick = () => {
+            document.getElementById('searchInput').value = item.name;
+            list.innerHTML = '';
+          };
+          list.appendChild(li);
+        });
+      } else {
+        error.textContent = 'Major not found!';
+      }
+    })
+    .catch(() => {
+      error.textContent = 'Error fetching suggestions';
+    });
+}
+
+function goFirstResult() {
+  const id = document.getElementById('firstResultId').textContent;
+  if (id) {
+    window.location.href = `/majorsview/${id}`;
+  }
+}
+</script>
+{% endblock %}

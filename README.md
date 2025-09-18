@@ -1,9 +1,6 @@
-#  Majorly
-
+# Majorly
 
 <img width="408" height="612" alt="WhatsApp_Image_2025-09-13_at_10 24 41_PM-removebg-preview" src="https://github.com/user-attachments/assets/a8f97ee7-fb3b-41ab-8520-904c81a0118d" />
-
-
 
 **Majorly** is an engaging and interactive career discovery platform designed for students and job seekers to explore academic majors and career paths based on their interests, hobbies, and preferences.
 
@@ -18,10 +15,12 @@ Majorly helps bridge the gap between students' passions and real-world opportuni
 ## ✨ Features
 
 🔍 **Search and Discover:**
+
 - Search bar for quick access to any major.
 - Explore detailed information about academic disciplines.
 
 📊 **Dashboard View:**
+
 - Pie chart representation of interest areas.
 - Detailed cards showing:
   - Name of the major
@@ -30,56 +29,59 @@ Majorly helps bridge the gap between students' passions and real-world opportuni
   - University availability (local and international)
 
 🌟 **Personalized Recommendations:**
+
 - Input hobbies/interests to get matched with suitable majors.
 - Save and track favorite majors.
 
 👤 **User Profiles:**
+
 - View and manage saved majors.
 - Personalized career planning roadmap.
 
 📌 **Ratings and Reviews:**
+
 - Rate majors based on personal interest or satisfaction.
 - Read reviews from other users.
 
 🧠 **AI Matching (Coming Soon):**
+
 - Smart algorithm that predicts best-fit majors using AI/NLP.
 
 ---
 
 ## 🛠️ Technologies Used
 
-- **Frontend:** HTML, CSS, JavaScript *(React for dynamic UI)*
-- **Backend:** Python (Django / Flask / FastAPI)
-- **Database:** PostgreSQL / SQLite / MySQL
+- **Frontend:** HTML, CSS, JavaScript (basic static assets)
+- **Backend:** Python (Flask)
+- **Database:** SQLite (via local JSON and session for demo)
 - **Future Tech:** AI/NLP for smart matching & recommendation
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation (Backend Flask)
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/yourusername/Majorly.git
+# 1) Clone the repo
+git clone https://github.com/yourusername/CareerMatch.git
+cd CareerMatch
 
-# 2. Navigate into the directory
-cd Majorly
-
-# 3. Set up virtual environment
+# 2) Create and activate a virtual environment
 python -m venv venv
-# Activate:
 # Windows
 venv\Scripts\activate
 # macOS/Linux
-source venv/bin/activate
+# source venv/bin/activate
 
-# 4. Install dependencies
+# 3) Install backend dependencies
+cd backend
 pip install -r requirements.txt
 
-# 5. Run the development server
-python manage.py runserver  # if using Django
+# 4) Run the Flask dev server
+python app.py
 
-# 6. Visit the app in your browser
-http://127.0.0.1:8000
+# 5) Open the app
+# Flask default
+http://127.0.0.1:5000
 ```
 
 ---
@@ -108,99 +110,59 @@ http://127.0.0.1:8000
 - 📚 Blog or resource section for career advice
 
 ---
-## Backend
+
+## Backend (this repo)
+
 ```bash
 backend/
-│── manage.py
-│── requirements.txt
-│── db.sqlite3 ( PostgreSQL/MySQL)
-│── .gitignore
-│── venv/
-
-├── user_app/               # User authentication & profiles
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── forms.py
-│   ├── templates/user_app/
-│       ├── signup.html
-│       ├── login.html
-│       ├── profile.html
-
-├── major_app/              # Majors & career info
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── templates/major_app/
-│       ├── majors_list.html
-│       ├── major_detail.html
-│       ├── dashboard.html
-
-├── review_app/             # Ratings & reviews
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── templates/review_app/
-│       ├── reviews_list.html
-│       ├── add_review.html
-
-├── favorite_app/           # Favorites management
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── templates/favorite_app/
-│       ├── favorites_list.html
-
-├── static/                 # CSS, JS, images
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│       └── main.js
-
-└── templates/
-    ├── base.html           # Layout (navbar, footer)
-    ├── home.html           # Landing page
-
+├── app.py                  # Flask app entrypoint and routes
+├── requirements.txt        # Python dependencies
+├── majors.json             # Majors dataset (demo)
+├── db.sqlite3              # (optional) not used by Flask routes currently
+├── templates/
+│   ├── base.html           # Global layout (navbar + footer)
+│   ├── navbar.html
+│   ├── footer.html
+│   ├── landing.html
+│   ├── home.html
+│   ├── search.html
+│   ├── suggest.html
+│   ├── majorsview.html
+│   ├── profile.html
+│   ├── favorites.html
+│   └── history.html
+├── static/
+│   ├── logo.png
+│   ├── favorite.png
+│   ├── history.png
+│   ├── logout.png
+│   ├── profile.png
+│   ├── majorsview.css      # Styles for majors detail screen
+│   └── css/
+│       ├── base.css        # Design tokens + global styles
+│       ├── navbar.css
+│       ├── footer.css
+│       ├── home.css
+│       ├── login.css
+│       ├── landing.css
+│       ├── profile.css
+│       ├── favorites.css
+│       ├── history.css
+│       ├── signup.css
+│       └── search_bar.css
+└── user.json               # Demo user store
 ```
 
-## Frontend
+## Frontend (optional stub)
 
 ```bash
 frontend/
-│── package.json
-│── public/
-│   ├── index.html
-│
-├── src/
-│   ├── index.js
-│   ├── App.js
-│   ├── components/
-│   │   ├── Navbar.js
-│   │   ├── Footer.js
-│   │   ├── SearchBar.js
-│   │   ├── DashboardChart.js
-│   │   ├── MajorCard.js
-│   │   ├── ReviewCard.js
-│   │   ├── ProfileCard.js
-│   │
-│   ├── pages/
-│       ├── Home.js
-│       ├── Signup.js
-│       ├── Login.js
-│       ├── MajorsList.js
-│       ├── MajorDetail.js
-│       ├── Dashboard.js
-│       ├── Profile.js
-│
-├── assets/                 # icons, logos, illustrations
-│
-└── styles/
-    ├── global.css
+├── package.json
+└── public/
+    └── index.html
 ```
 
- 
 ---
-
 
 ## 📄 License
 
@@ -212,6 +174,6 @@ This project is licensed under the [MIT License](LICENSE).
 
 For feedback or collaboration:
 
-**[Your Name]**  
+**Your Name**  
 📧 your.email@example.com  
-🔗 [GitHub Profile](https://github.com/yourusername)
+🔗 GitHub: https://github.com/yourusername
